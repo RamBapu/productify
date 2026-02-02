@@ -2,6 +2,10 @@ import express from "express";
 import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
 
+import usersRoute from "./routes/userRoutes";
+import productsRoute from "./routes/productRoutes";
+import commentsRoute from "./routes/commentRoutes";
+
 import { ENV } from "./config/env";
 
 const app = express();
@@ -24,6 +28,10 @@ app.get("/", (req, res) => {
     },
   });
 });
+
+app.use("/api/users", usersRoute);
+app.use("/api/products", productsRoute);
+app.use("/api/comments", commentsRoute);
 
 app.get("/health", (req, res) => {
   res.status(200).json({ message: "Health check passed" });

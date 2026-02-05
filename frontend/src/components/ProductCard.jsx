@@ -1,10 +1,12 @@
 import { Link } from "react-router";
 import { MessageCircleIcon } from "lucide-react";
+import { useProduct } from "../hooks/useProducts";
 
 const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
 const ProductCard = ({ product }) => {
   const isNew = new Date(product.createdAt) > oneWeekAgo;
+  const { data: productEl } = useProduct(product?.id);
 
   return (
     <Link
@@ -41,10 +43,10 @@ const ProductCard = ({ product }) => {
               </span>
             </div>
           )}
-          {product.comments && (
+          {productEl?.comments && (
             <div className="flex items-center gap-1 text-base-content/50">
               <MessageCircleIcon className="size-3" />
-              <span className="text-xs">{product.comments.length}</span>
+              <span className="text-xs">{productEl?.comments.length}</span>
             </div>
           )}
         </div>

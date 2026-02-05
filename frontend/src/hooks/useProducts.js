@@ -21,7 +21,7 @@ export const useProduct = (id) => {
   return useQuery({
     queryKey: ["product", id],
     queryFn: () => getProductById(id),
-    enabled: !!id,
+    enabled: !!id, // important - useParams() is synchronous, so id will be undefined in first renders
   });
 };
 

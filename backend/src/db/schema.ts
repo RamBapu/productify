@@ -52,10 +52,10 @@ export const userRelations = relations(users, ({ many }) => ({
 }));
 
 export const productRelations = relations(products, ({ one, many }) => ({
+  comments: many(comments),
   users: one(users, { fields: [products.userId], references: [users.id] }),
   // `fields` = the foreign key column in this table (products.userId)
   // `references` = the primary key column in the RELATED table (users.id)
-  comments: many(comments),
 }));
 
 export const commentRelations = relations(comments, ({ one }) => ({
